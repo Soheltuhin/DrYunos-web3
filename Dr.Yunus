@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DrYunos Web3 Balance Checker</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+</head>
+<body style="font-family: Arial; text-align: center; padding-top: 50px;">
+  <h1>Ethereum Balance Checker</h1>
+  <input type="text" id="address" placeholder="Enter ETH Address" size="42">
+  <button onclick="checkBalance()">Check Balance</button>
+  <p id="result"></p>
+
+  <script>
+    async function checkBalance() {
+      const address = document.getElementById('address').value;
+      if (!Web3.utils.isAddress(address)) {
+        document.getElementById('result').innerText = "Invalid address!";
+        return;
+      }
+
+      const web3 = new Web3('https://mainnet.infura.io/v3/your_infura_project_id');
+      try {
+        const balance = await web3.eth.getBalance(address);
+        const ethBalance = web3.utils.fromWei(balance, 'ether');
+        document.getElementById('result').innerText = `Balance: ${ethBalance} ETH`;
+      } catch (err) {
+        document.getElementById('result').innerText = "Error fetching balance.";
+      }
+    }
+  </script>
+</body>
+</html>https:github.com/Soheltuhin/DrYunos-Web3
