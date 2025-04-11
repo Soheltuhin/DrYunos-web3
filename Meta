@@ -1,0 +1,15 @@
+<script>
+  async function connectWallet() {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        const address = accounts[0];
+        document.getElementById("walletAddress").innerText = "Connected: " + address;
+      } catch (err) {
+        alert("Connection rejected.");
+      }
+    } else {
+      alert("MetaMask not found. Please install MetaMask extension.");
+    }
+  }
+</script>
